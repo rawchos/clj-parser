@@ -1,9 +1,3 @@
----
-title: clj-parser.README
-created: '2021-02-28T20:12:59.131Z'
-modified: '2021-02-28T20:29:32.891Z'
----
-
 # clj-parser
 
 ## Description
