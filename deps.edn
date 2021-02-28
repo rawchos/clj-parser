@@ -2,6 +2,10 @@
  :deps    {org.clojure/clojure {:mvn/version "1.10.1"}}
  :aliases {:run  {:main-opts ["-m" "clj-parser.core"]}
            :test {:extra-paths ["test" "test-resources"]
-                  :extra-deps  {}}
+                  :extra-deps  {cljfmt/cljfmt             {:mvn/version "0.6.4"}
+                                cheshire/cheshire         {:mvn/version "5.9.0"}
+                                midje/midje               {:mvn/version "1.9.9"}
+                                lambdaisland/kaocha       {:mvn/version "0.0-541"}
+                                lambdaisland/kaocha-midje {:mvn/version "0.0-5"}}}
            :nrepl   {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
                      :main-opts  ["-m" "nrepl.cmdline"]}}}
