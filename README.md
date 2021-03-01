@@ -1,7 +1,7 @@
 ---
 title: clj-parser.README
 created: '2021-02-28T20:12:59.131Z'
-modified: '2021-03-01T21:58:56.942Z'
+modified: '2021-03-01T22:57:34.881Z'
 ---
 
 # clj-parser
@@ -24,3 +24,7 @@ bin/run-tests
 
 ## Caveats
 Birth dates in files are expected to be in the following format: `2021-03-01`
+Birth dates are being output in M/d/yyyy format
+
+## Command Line
+There are sample files located in the `resources/samples` directory. To process a file, run `bin/parse-file resources/samples/{file.txt}` and the output will be displayed to the screen. I chose to output the entire record, field names and all.

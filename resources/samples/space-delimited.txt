@@ -1,0 +1,6 @@
+Rogers | Steve | captain.america@avengers.com | blue | 1918-07-04
+Stark | Tony | iron.man@avengers.com | red | 1970-05-29
+Romanoff | Natasha | shared@avengers.com | black | 1982-08-05
+Maximoff | Wanda | shared@avengers.com | red | 1995-03-17
+Lang | Scott | ant.man@avengers.com | red | 1977-10-18
+Barton | Clint | shared@avengers.com | black | 1977-02-16

@@ -1,0 +1,6 @@
+Maximoff, Wanda, shared@avengers.com, red, 1995-03-17
+Barton, Clint, shared@avengers.com, black, 1977-02-16
+Rogers, Steve, captain.america@avengers.com, blue, 1918-07-04
+Lang, Scott, ant.man@avengers.com, red, 1977-10-18
+Romanoff, Natasha, shared@avengers.com, black, 1982-08-05
+Stark, Tony, iron.man@avengers.com, red, 1970-05-29
