@@ -15,7 +15,13 @@
   (doseq [record (util/sort-last-name records)]
     (println record)))
 
+(defn print-by-email-last-name [records]
+  (doseq [record (util/sort-email-last-name records)]
+    (println record)))
+
 (defn -main [file]
   (let [records (map util/parse-record (read-file file))]
     (println "Sorting by Last Name (descending):")
-    (print-by-last-name records)))
+    (print-by-last-name records)
+    (println "\nSorting by Email (descending) then Last Name (ascending):")
+    (print-by-email-last-name records)))
