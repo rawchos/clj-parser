@@ -1,7 +1,7 @@
 ---
 title: clj-parser.README
 created: '2021-02-28T20:12:59.131Z'
-modified: '2021-02-28T21:10:48.472Z'
+modified: '2021-03-01T21:58:56.942Z'
 ---
 
 # clj-parser
@@ -21,3 +21,6 @@ This is a basic app that parses records based on 3 different delimited formats: 
 ```
 bin/run-tests
 ```
+
+## Caveats
+Birth dates in files are expected to be in the following format: `2021-03-01`

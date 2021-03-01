@@ -8,6 +8,7 @@
   [file]
   (s/split (slurp file) #"\n"))
 
+;; TODO: Change this up to format the date correctly in the output: M/D/YYYY
 (defn print-records [message sort-fn records]
   (println message)
   (doseq [record (sort-fn records)]

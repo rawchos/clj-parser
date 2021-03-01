@@ -1,18 +1,22 @@
 (ns util.core
-  (:require [clojure.string :as s]))
+  (:require [clojure.string :as s])
+  (:import (java.time LocalDate)))
 
 (def formats-re #"(?: \| |\||, |,| )")
 
 (defn parse-record
   "Takes a record that is either pipe, comma, or space delimited
-   and parses it then returns a hashmap of the values."
+   and parses it then returns a hashmap of the values. Assumes birth
+   dates are in the form of: 2021-03-01. Could maybe be switched to
+   allow multiple formats by defining a set of formatters and looping
+   through them but then we run the risk of days/months being interposed."
   [record]
   (let [[lname fname email favorite-color date-of-birth] (s/split record formats-re)]
     {:last-name      lname
      :first-name     fname
      :email          email
      :favorite-color favorite-color
-     :date-of-birth  date-of-birth}))
+     :date-of-birth  (LocalDate/parse date-of-birth)}))
 
 (def asc compare)
 (def desc #(compare %2 %1))
