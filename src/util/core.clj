@@ -38,3 +38,6 @@
    sorting direction."
   [records]
   (sort #(compare-by [:email desc :last-name asc] %1 %2) records))
+
+(defn sort-birth-date [records]
+  (sort-by :date-of-birth records))

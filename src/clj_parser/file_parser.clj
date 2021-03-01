@@ -21,10 +21,13 @@
                    records)
     (print-records "\nSorting by Email (descending) then Last Name (ascending):"
                    util/sort-email-last-name
+                   records)
+    (print-records "\nSorting by Birth Date (ascending):"
+                   util/sort-birth-date
                    records)))
 
 (comment
 (let [records (->> (read-file "resources/samples/pipe-delimited1.txt")
                    (map util/parse-record))]
-  (print-records "Test Message" util/sort-last-name records))
+  (print-records "Test Message" util/sort-birth-date records))
 )

@@ -43,3 +43,12 @@
                                                        {:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :date-of-birth (to-date "1970-05-29")}
                                                        {:last-name "Rogers", :first-name "Steve", :email "captain.america@avengers.com", :favorite-color "blue", :date-of-birth (to-date "1918-07-04")}
                                                        {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :date-of-birth (to-date "1977-10-18")}]))
+
+(facts "about 'sort-birth-date'"
+       (fact "should sort by birth date ascending"
+             (u/sort-birth-date test-records) => [{:last-name "Rogers", :first-name "Steve", :email "captain.america@avengers.com", :favorite-color "blue", :date-of-birth (to-date "1918-07-04")}
+                                                  {:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :date-of-birth (to-date "1970-05-29")}
+                                                  {:last-name "Barton", :first-name "Clint", :email "shared@avengers.com", :favorite-color "black", :date-of-birth (to-date "1977-02-16")}
+                                                  {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :date-of-birth (to-date "1977-10-18")}
+                                                  {:last-name "Romanoff", :first-name "Natasha", :email "shared@avengers.com", :favorite-color "black", :date-of-birth (to-date "1982-08-05")}
+                                                  {:last-name "Maximoff", :first-name "Wanda", :email "shared@avengers.com", :favorite-color "red", :date-of-birth (to-date "1995-03-17")}]))
