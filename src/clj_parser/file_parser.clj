@@ -8,8 +8,14 @@
   [file]
   (s/split (slurp file) #"\n"))
 
+(defn print-by-last-name
+  "This function takes a list of records, sorts them by last name
+   descending, then prints them out."
+  [records]
+  (doseq [record (util/sort-last-name records)]
+    (println record)))
+
 (defn -main [file]
   (let [records (map util/parse-record (read-file file))]
-    (println records)))
-
-; (read-file "resources/samples/pipe-delimited1.txt")
+    (println "Sorting by Last Name (descending):")
+    (print-by-last-name records)))

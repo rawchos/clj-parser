@@ -1,2 +1,6 @@
 Stark | Tony | iron.man@avengers.com | red | 5/29/1970
 Lang | Scott | ant.man@avengers.com | red | 10/18/1977
+Barton | Clint | shared@avengers.com | black | 2/16/1977
+Romanoff | Natasha | shared@avengers.com | black | 8/5/1982
+Maximoff | Wanda | shared@avengers.com | red | 3/17/1995
+Rogers | Steve | captain.america@avengers.com | blue | 7/4/1918

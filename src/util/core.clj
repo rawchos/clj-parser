@@ -13,3 +13,6 @@
      :email          email
      :favorite-color favorite-color
      :date-of-birth  date-of-birth}))
+
+(defn sort-last-name [records]
+  (sort-by :last-name #(compare %2 %1) records))
