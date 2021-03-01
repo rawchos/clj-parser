@@ -52,3 +52,8 @@
                                                   {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :date-of-birth (to-date "1977-10-18")}
                                                   {:last-name "Romanoff", :first-name "Natasha", :email "shared@avengers.com", :favorite-color "black", :date-of-birth (to-date "1982-08-05")}
                                                   {:last-name "Maximoff", :first-name "Wanda", :email "shared@avengers.com", :favorite-color "red", :date-of-birth (to-date "1995-03-17")}]))
+
+(facts "about 'date->string'"
+       (fact "should convert the date in M/d/yyyy format"
+             (u/date->string (to-date "2021-03-01")) => "3/1/2021"
+             (u/date->string (to-date "2000-10-18")) => "10/18/2000"))

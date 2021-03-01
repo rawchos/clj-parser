@@ -8,11 +8,12 @@
   [file]
   (s/split (slurp file) #"\n"))
 
-;; TODO: Change this up to format the date correctly in the output: M/D/YYYY
 (defn print-records [message sort-fn records]
   (println message)
-  (doseq [record (sort-fn records)]
-    (println (format "  %s" record))))
+  (doseq [{:keys [date-of-birth] :as record} (sort-fn records)]
+    (println (format "  %s"
+                     (assoc record
+                            :date-of-birth (util/date->string date-of-birth))))))
 
 (defn -main [file]
   (let [records (map util/parse-record (read-file file))]
@@ -25,9 +26,3 @@
     (print-records "\nSorting by Birth Date (ascending):"
                    util/sort-birth-date
                    records)))
-
-(comment
-(let [records (->> (read-file "resources/samples/pipe-delimited1.txt")
-                   (map util/parse-record))]
-  (print-records "Test Message" util/sort-birth-date records))
-)

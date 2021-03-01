@@ -1,6 +1,10 @@
 (ns util.core
   (:require [clojure.string :as s])
-  (:import (java.time LocalDate)))
+  (:import (java.time LocalDate)
+           (java.time.format DateTimeFormatter)))
+
+(defn date->string [date]
+  (.format date (DateTimeFormatter/ofPattern "M/d/yyyy")))
 
 (def formats-re #"(?: \| |\||, |,| )")
 
