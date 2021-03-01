@@ -9,20 +9,18 @@
   (s/split (slurp file) #"\n"))
 
 (defn print-records [message sort-fn records]
-  (println message)
+  (println (format "\n%s" message))
   (doseq [{:keys [date-of-birth] :as record} (sort-fn records)]
-    (println (format "  %s"
-                     (assoc record
-                            :date-of-birth (util/date->string date-of-birth))))))
+    (println
+     (format "  %s"
+             (assoc record :date-of-birth (util/date->string date-of-birth))))))
+
+(def print-config
+  [{:message "Sorting by Last Name (descending):" :sort-fn util/sort-last-name}
+   {:message "Sorting by Email (descending) then Last Name (ascending):" :sort-fn util/sort-email-last-name}
+   {:message "Sorting by Birth Date (ascending):" :sort-fn util/sort-birth-date}])
 
 (defn -main [file]
   (let [records (map util/parse-record (read-file file))]
-    (print-records "Sorting by Last Name (descending):"
-                   util/sort-last-name
-                   records)
-    (print-records "\nSorting by Email (descending) then Last Name (ascending):"
-                   util/sort-email-last-name
-                   records)
-    (print-records "\nSorting by Birth Date (ascending):"
-                   util/sort-birth-date
-                   records)))
+    (doseq [{:keys [message sort-fn]} print-config]
+      (print-records message sort-fn records))))
