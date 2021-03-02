@@ -1,11 +1,14 @@
 (ns api.core
   (:require [api.schemas :refer [Record]]
+            [camel-snake-kebab.core :refer [->camelCase
+                                            ->kebab-case]]
             [compojure.api.sweet :refer [api
                                          context
                                          GET
                                          POST
                                          undocumented]]
             [compojure.route :refer [not-found]]
+            [muuntaja.core :as muuntaja]
             [ring.adapter.jetty :as jetty]
             [ring.util.http-response :refer [created
                                              ok]]
@@ -20,9 +23,26 @@
   []
   @records)
 
+(defn encode-key [k]
+  (->camelCase (name k)))
+
+(defn decode-key [k]
+  (keyword (->kebab-case k)))
+
+;; Create a muuntaja instance to handle how we convert keywords
+;; to and from json
+(def muuntaja-instance
+  (muuntaja/create
+   (-> muuntaja/default-options
+       (update-in [:formats "application/json"]
+                  merge
+                  {:encoder-opts {:encode-key-fn encode-key}
+                   :decoder-opts {:decode-key-fn decode-key}}))))
+
 (def app
   (api
-   {:swagger
+   {:formats muuntaja-instance
+    :swagger
     {:ui "/"
      :spec "/swagger.json"
      :data {:info {:title "Clojure Parser"

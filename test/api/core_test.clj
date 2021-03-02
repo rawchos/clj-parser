@@ -42,9 +42,9 @@
                (let [response (mock-get-request "/api/records/email")
                      body     (parse-body (:body response))]
                  (:status response) => 200
-                 body => {:data [{:last-name "Barton", :first-name "Clint", :email "shared@avengers.com", :favorite-color "black", :birth-date "1977-02-16"}
-                                 {:last-name "Maximoff", :first-name "Wanda", :email "shared@avengers.com", :favorite-color "red", :birth-date "1995-03-17"}
-                                 {:last-name "Romanoff", :first-name "Natasha", :email "shared@avengers.com", :favorite-color "black", :birth-date "1982-08-05"}
-                                 {:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :birth-date "1970-05-29"}
-                                 {:last-name "Rogers", :first-name "Steve", :email "captain.america@avengers.com", :favorite-color "blue", :birth-date "1918-07-04"}
-                                 {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :birth-date "1977-10-18"}]}))))
+                 body => {:data [{:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1977-02-16"}
+                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "1995-03-17"}
+                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1982-08-05"}
+                                 {:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "1970-05-29"}
+                                 {:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "1918-07-04"}
+                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "1977-10-18"}]}))))
