@@ -1,0 +1,6 @@
+[{:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :birth-date "1970-05-29"}
+ {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :birth-date "1977-10-18"}
+ {:last-name "Barton", :first-name "Clint", :email "shared@avengers.com", :favorite-color "black", :birth-date "1977-02-16"}
+ {:last-name "Romanoff", :first-name "Natasha", :email "shared@avengers.com", :favorite-color "black", :birth-date "1982-08-05"}
+ {:last-name "Maximoff", :first-name "Wanda", :email "shared@avengers.com", :favorite-color "red", :birth-date "1995-03-17"}
+ {:last-name "Rogers", :first-name "Steve", :email "captain.america@avengers.com", :favorite-color "blue", :birth-date "1918-07-04"}]
