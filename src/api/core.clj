@@ -60,6 +60,11 @@
        :return {:data [Record]}
        :summary "Returns a list of Records sorted by birthdate ascending"
        (ok {:data (util/sort-birth-date (get-records))}))
+     
+     (GET "/records/name" []
+       :return {:data [Record]}
+       :summary "Returns a list of Records sorted by lastname descending"
+       (ok {:data (util/sort-last-name (get-records))}))
 
      (GET "/server/status" []
        :return {:data schema/Str}
