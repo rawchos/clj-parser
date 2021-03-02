@@ -1,5 +1,6 @@
 (ns api.core
-  (:require [compojure.api.sweet :refer [api
+  (:require [api.schemas :refer [Record]]
+            [compojure.api.sweet :refer [api
                                          context
                                          GET
                                          POST
@@ -8,7 +9,16 @@
             [ring.adapter.jetty :as jetty]
             [ring.util.http-response :refer [created
                                              ok]]
-            [schema.core :as schema]))
+            [schema.core :as schema]
+            [util.core :as util]))
+
+(def records (atom (util/default-db)))
+
+(defn get-records
+  "This is a wrapper for the records atom just so we can override it
+   in our tests."
+  []
+  @records)
 
 (def app
   (api
@@ -20,6 +30,11 @@
    
    (context "/api" []
      :tags ["api"]
+     
+     (GET "/records/email" []
+       :return {:data [Record]}
+       :summary "Returns a list of Records sorted by email"
+       (ok {:data (util/sort-email-last-name (get-records))}))
 
      (GET "/server/status" []
        :return {:data schema/Str}

@@ -1,10 +1,15 @@
 (ns api.core-test
   (:require [api.core :as api]
             [cheshire.core :refer [parse-string]]
-            [midje.sweet :refer [fact
+            [midje.sweet :refer [against-background
+                                 fact
                                  facts
                                  =>]]
-            [ring.mock.request :as mock]))
+            [ring.mock.request :as mock])
+  (:import (java.time LocalDate)))
+
+(defn to-date [sdate]
+  (LocalDate/parse sdate))
 
 (defn parse-body [body]
   (parse-string (slurp body) true))
@@ -25,3 +30,21 @@
                    body     (parse-body (:body response))]
                (:status response) => 404
                body => {:data "Route Not Found"})))
+
+(facts "about '/api/records/email'"
+       (against-background [(api/get-records) => [{:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :birth-date (to-date "1970-05-29")}
+                                                  {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :birth-date (to-date "1977-10-18")}
+                                                  {:last-name "Barton", :first-name "Clint", :email "shared@avengers.com", :favorite-color "black", :birth-date (to-date "1977-02-16")}
+                                                  {:last-name "Romanoff", :first-name "Natasha", :email "shared@avengers.com", :favorite-color "black", :birth-date (to-date "1982-08-05")}
+                                                  {:last-name "Maximoff", :first-name "Wanda", :email "shared@avengers.com", :favorite-color "red", :birth-date (to-date "1995-03-17")}
+                                                  {:last-name "Rogers", :first-name "Steve", :email "captain.america@avengers.com", :favorite-color "blue", :birth-date (to-date "1918-07-04")}]]
+         (fact "GET should return 200 and return a list of records sorted by email"
+               (let [response (mock-get-request "/api/records/email")
+                     body     (parse-body (:body response))]
+                 (:status response) => 200
+                 body => {:data [{:last-name "Barton", :first-name "Clint", :email "shared@avengers.com", :favorite-color "black", :birth-date "1977-02-16"}
+                                 {:last-name "Maximoff", :first-name "Wanda", :email "shared@avengers.com", :favorite-color "red", :birth-date "1995-03-17"}
+                                 {:last-name "Romanoff", :first-name "Natasha", :email "shared@avengers.com", :favorite-color "black", :birth-date "1982-08-05"}
+                                 {:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :birth-date "1970-05-29"}
+                                 {:last-name "Rogers", :first-name "Steve", :email "captain.america@avengers.com", :favorite-color "blue", :birth-date "1918-07-04"}
+                                 {:last-name "Lang", :first-name "Scott", :email "ant.man@avengers.com", :favorite-color "red", :birth-date "1977-10-18"}]}))))

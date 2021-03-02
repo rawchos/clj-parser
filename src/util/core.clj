@@ -1,10 +1,39 @@
 (ns util.core
-  (:require [clojure.string :as s])
-  (:import (java.time LocalDate)
+  (:require [clojure.edn :as edn]
+            [clojure.java.io :as io]
+            [clojure.string :as s])
+  (:import (java.io PushbackReader)
+           (java.time LocalDate)
            (java.time.format DateTimeFormatter)))
+
+(defn spit-edn
+  "Convenience function for writing out edn to the filesystem"
+  [filename data]
+  (spit filename (with-out-str (prn data))))
+
+(defn read-edn
+  "Convenience function for reading in edn data from the filesystem"
+  [filename]
+  (edn/read (PushbackReader. (io/reader filename))))
 
 (defn date->string [date]
   (.format date (DateTimeFormatter/ofPattern "M/d/yyyy")))
+
+(defn string->date [sdate]
+  (LocalDate/parse sdate))
+
+(defn convert-date [record]
+  (reduce-kv
+   (fn [m k v]
+     (if (= k :birth-date)
+       (assoc m k (string->date v))
+       (assoc m k v)))
+   {}
+   record))
+
+(defn default-db []
+  (->> (read-edn "resources/api/default-records.edn")
+       (map convert-date)))
 
 (def formats-re #"(?: \| |\||, |,| )")
 
@@ -20,7 +49,7 @@
      :first-name     fname
      :email          email
      :favorite-color favorite-color
-     :birth-date     (LocalDate/parse birth-date)}))
+     :birth-date     (string->date birth-date)}))
 
 (def asc compare)
 (def desc #(compare %2 %1))
