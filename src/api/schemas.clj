@@ -7,3 +7,6 @@
    :email          schema/Str
    :favorite-color schema/Str
    :birth-date     java.time.LocalDate})
+
+(schema/defschema ParseRecord
+  {:data schema/Str})

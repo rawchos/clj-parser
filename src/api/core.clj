@@ -1,5 +1,8 @@
 (ns api.core
-  (:require [api.schemas :refer [Record]]
+  (:require [api.exception :refer [handlers
+                                   throw-ex!]]
+            [api.schemas :refer [ParseRecord
+                                 Record]]
             [camel-snake-kebab.core :refer [->camelCase
                                             ->kebab-case]]
             [compojure.api.sweet :refer [api
@@ -22,6 +25,20 @@
    in our tests."
   []
   @records)
+
+(defn add-record [{data-line :data}]
+  (let [record (try
+                 (util/parse-record data-line)
+                 (catch Exception _ (throw-ex! {:type :bad-request
+                                                :title "Unable to Parse"
+                                                :message "Unable to parse data line"})))]
+    (if ((set (get-records)) record)
+      (throw-ex! {:type :conflict
+                  :title "Record Already Exists"
+                  :message "A record for this person already exists"
+                  :error-data record})
+      (swap! records conj record))
+    (:last-name record)))
 
 (defn encode-key [k]
   (->camelCase (name k)))
@@ -46,10 +63,16 @@
     {:ui "/"
      :spec "/swagger.json"
      :data {:info {:title "Clojure Parser"
-                   :description "Create and View records parsed from comma, space, and pipe delimited formats."}}}}
+                   :description "Create and View records parsed from comma, space, and pipe delimited formats."}}}
+    :exceptions handlers}
    
    (context "/api" []
      :tags ["api"]
+
+     (POST "/records" []
+       :body [record ParseRecord]
+       :summary "Creates a new Record if it doesn't already exist."
+       (created (str "/api/records/" (add-record record))))
      
      (GET "/records/email" []
        :return {:data [Record]}
