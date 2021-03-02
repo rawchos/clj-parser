@@ -11,6 +11,7 @@
                                 cheshire/cheshire         {:mvn/version "5.9.0"}
                                 midje/midje               {:mvn/version "1.9.9"}
                                 lambdaisland/kaocha       {:mvn/version "0.0-541"}
-                                lambdaisland/kaocha-midje {:mvn/version "0.0-5"}}}
+                                lambdaisland/kaocha-midje {:mvn/version "0.0-5"}
+                                ring/ring-mock            {:mvn/version "0.4.0"}}}
            :nrepl   {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
                      :main-opts  ["-m" "nrepl.cmdline"]}}}
