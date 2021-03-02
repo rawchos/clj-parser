@@ -15,12 +15,12 @@
    allow multiple formats by defining a set of formatters and looping
    through them but then we run the risk of days/months being interposed."
   [record]
-  (let [[lname fname email favorite-color date-of-birth] (s/split record formats-re)]
+  (let [[lname fname email favorite-color birth-date] (s/split record formats-re)]
     {:last-name      lname
      :first-name     fname
      :email          email
      :favorite-color favorite-color
-     :date-of-birth  (LocalDate/parse date-of-birth)}))
+     :birth-date     (LocalDate/parse birth-date)}))
 
 (def asc compare)
 (def desc #(compare %2 %1))
@@ -44,4 +44,4 @@
   (sort #(compare-by [:email desc :last-name asc] %1 %2) records))
 
 (defn sort-birth-date [records]
-  (sort-by :date-of-birth records))
+  (sort-by :birth-date records))

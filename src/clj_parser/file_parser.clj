@@ -10,10 +10,10 @@
 
 (defn print-records [message sort-fn records]
   (println (format "\n%s" message))
-  (doseq [{:keys [date-of-birth] :as record} (sort-fn records)]
+  (doseq [{:keys [birth-date] :as record} (sort-fn records)]
     (println
      (format "  %s"
-             (assoc record :date-of-birth (util/date->string date-of-birth))))))
+             (assoc record :birth-date (util/date->string birth-date))))))
 
 (def print-config
   [{:message "Sorting by Last Name (descending):" :sort-fn util/sort-last-name}
