@@ -53,8 +53,13 @@
      
      (GET "/records/email" []
        :return {:data [Record]}
-       :summary "Returns a list of Records sorted by email"
+       :summary "Returns a list of Records sorted by email descending and last name ascending"
        (ok {:data (util/sort-email-last-name (get-records))}))
+
+     (GET "/records/birthdate" []
+       :return {:data [Record]}
+       :summary "Returns a list of Records sorted by birthdate ascending"
+       (ok {:data (util/sort-birth-date (get-records))}))
 
      (GET "/server/status" []
        :return {:data schema/Str}
