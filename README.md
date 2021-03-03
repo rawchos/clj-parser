@@ -1,7 +1,7 @@
 ---
 title: clj-parser.README
 created: '2021-02-28T20:12:59.131Z'
-modified: '2021-03-01T22:57:34.881Z'
+modified: '2021-03-03T16:47:38.372Z'
 ---
 
 # clj-parser
@@ -23,8 +23,27 @@ bin/run-tests
 ```
 
 ## Caveats
-Birth dates in files are expected to be in the following format: `2021-03-01`
-Birth dates are being output in M/d/yyyy format
+ * Birth dates in files are expected to be in the following format: `2021-03-01`
+ * Birth dates are being output in M/d/yyyy format
+ * I also took some liberties in Avengers birthdays
 
 ## Command Line
 There are sample files located in the `resources/samples` directory. To process a file, run `bin/parse-file resources/samples/{file.txt}` and the output will be displayed to the screen. I chose to output the entire record, field names and all.
+
+## REST API
+ * Listens on port 8080
+ * POST /api/records
+   * Body should contain `{"data": "pipe, comma, or space delimited record"}`
+   * Returns 409 conflict if this exact record already exists
+   * Returns 400 bad request if unable to parse
+ * GET /api/records/email
+   * Returns current records sorted by email (descending) then last name (ascending)
+ * GET /api/records/birthdate
+   * Returns current records sorted by birthdate ascending
+ * GET /api/records/name
+   * Returns current records sorted by last name descending
+   
+## Running the API
+To run the API, you can do either of the following:
+ * `clj -M:run`
+ * `make run`
