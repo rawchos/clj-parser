@@ -1,6 +1,8 @@
 (ns api.core-test
   (:require [api.core :as api]
-            [cheshire.core :refer [parse-string]]
+            [api.exception :as ex]
+            [cheshire.core :refer [generate-string
+                                   parse-string]]
             [midje.sweet :refer [against-background
                                  fact
                                  facts
@@ -16,6 +18,11 @@
 
 (defn mock-get-request [url]
   (api/app (mock/request :get url)))
+
+(defn mock-post-request [url body]
+  (api/app (-> (mock/request :post url)
+               (mock/content-type "application/json")
+               (mock/body (generate-string body)))))
 
 (facts "about '/api/server/status'"
        (fact "GET should return 200 and and have a status message"
@@ -84,3 +91,40 @@
                                  {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "1995-03-17"}
                                  {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "1977-10-18"}
                                  {:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1977-02-16"}]}))))
+
+(facts "about '/api/records'"
+       (against-background [(api/add-record {:data "should-pass"}) => "pass"
+                            (api/add-record {:data "duplicate"}) => (ex/throw-ex! {:type :conflict
+                                                                                   :title "Record Already Exists"
+                                                                                   :message "A record for this person already exists"})
+                            (api/add-record {:data "parse-error"}) => (ex/throw-ex! {:type :bad-request
+                                                                                     :title "Unable to Parse"
+                                                                                     :message "Unable to parse data line"})]
+         (fact "POST on /api/records should return 201 and have the location in the header"
+               (let [response (mock-post-request "/api/records" {:data "should-pass"})
+                     location (-> (:headers response)
+                                  (get "Location"))]
+                 (:status response) => 201
+                 location => "/api/records/pass"))
+         (fact "POST on /api/records with a duplicate record should return a 409 with an error message"
+               (let [response (mock-post-request "/api/records" {:data "duplicate"})
+                     body     (parse-body (:body response))]
+                 (:status response) => 409
+                 body => {:errors [{:data {:message "A record for this person already exists"
+                                           :title "Record Already Exists"
+                                           :type "conflict"}
+                                    :detail "A record for this person already exists"
+                                    :status 409
+                                    :title "Record Already Exists"
+                                    :type "conflict"}]}))
+         (fact "POST on /api/records with an invalid data line should return a 400 with an error message"
+               (let [response (mock-post-request "/api/records" {:data "parse-error"})
+                     body     (parse-body (:body response))]
+                 (:status response) => 400
+                 body => {:errors [{:data {:message "Unable to parse data line"
+                                           :title "Unable to Parse"
+                                           :type "bad-request"}
+                                    :detail "Unable to parse data line"
+                                    :status 400
+                                    :title "Unable to Parse"
+                                    :type "bad-request"}]}))))

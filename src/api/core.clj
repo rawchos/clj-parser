@@ -5,6 +5,7 @@
                                  Record]]
             [camel-snake-kebab.core :refer [->camelCase
                                             ->kebab-case]]
+            [clojure.string :refer [lower-case]]
             [compojure.api.sweet :refer [api
                                          context
                                          GET
@@ -38,7 +39,7 @@
                   :message "A record for this person already exists"
                   :error-data record})
       (swap! records conj record))
-    (:last-name record)))
+    (lower-case (:last-name record))))
 
 (defn encode-key [k]
   (->camelCase (name k)))
