@@ -6,7 +6,7 @@
    :last-name      schema/Str
    :email          schema/Str
    :favorite-color schema/Str
-   :birth-date     java.time.LocalDate})
+   :birth-date     schema/Str})
 
 (schema/defschema ParseRecord
   {:data schema/Str})

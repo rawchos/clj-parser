@@ -41,6 +41,17 @@
       (swap! records conj record))
     (lower-case (:last-name record))))
 
+(defn convert-date [records]
+  (map
+   #(reduce-kv
+     (fn [m k v]
+       (if (= :birth-date k)
+         (assoc m k (util/date->string v))
+         (assoc m k v)))
+     {}
+     %)
+   records))
+
 (defn encode-key [k]
   (->camelCase (name k)))
 
@@ -78,17 +89,23 @@
      (GET "/records/email" []
        :return {:data [Record]}
        :summary "Returns a list of Records sorted by email descending and last name ascending"
-       (ok {:data (util/sort-email-last-name (get-records))}))
+       (ok {:data (-> (get-records)
+                      (util/sort-email-last-name)
+                      (convert-date))}))
 
      (GET "/records/birthdate" []
        :return {:data [Record]}
        :summary "Returns a list of Records sorted by birthdate ascending"
-       (ok {:data (util/sort-birth-date (get-records))}))
+       (ok {:data (-> (get-records)
+                      (util/sort-birth-date)
+                      (convert-date))}))
      
      (GET "/records/name" []
        :return {:data [Record]}
        :summary "Returns a list of Records sorted by lastname descending"
-       (ok {:data (util/sort-last-name (get-records))}))
+       (ok {:data (-> (get-records)
+                      (util/sort-last-name)
+                      (convert-date))}))
 
      (GET "/server/status" []
        :return {:data schema/Str}

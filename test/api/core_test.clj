@@ -51,12 +51,12 @@
                (let [response (mock-get-request "/api/records/email")
                      body     (parse-body (:body response))]
                  (:status response) => 200
-                 body => {:data [{:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1977-02-16"}
-                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "1995-03-17"}
-                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1982-08-05"}
-                                 {:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "1970-05-29"}
-                                 {:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "1918-07-04"}
-                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "1977-10-18"}]}))))
+                 body => {:data [{:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "2/16/1977"}
+                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "3/17/1995"}
+                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "8/5/1982"}
+                                 {:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "5/29/1970"}
+                                 {:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "7/4/1918"}
+                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "10/18/1977"}]}))))
 
 (facts "about '/api/records/birthdate'"
        (against-background [(api/get-records) => [{:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :birth-date (to-date "1970-05-29")}
@@ -69,12 +69,12 @@
                (let [response (mock-get-request "/api/records/birthdate")
                      body     (parse-body (:body response))]
                  (:status response) => 200
-                 body => {:data [{:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "1918-07-04"}
-                                 {:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "1970-05-29"}
-                                 {:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1977-02-16"}
-                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "1977-10-18"}
-                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1982-08-05"}
-                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "1995-03-17"}]}))))
+                 body => {:data [{:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "7/4/1918"}
+                                 {:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "5/29/1970"}
+                                 {:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "2/16/1977"}
+                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "10/18/1977"}
+                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "8/5/1982"}
+                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "3/17/1995"}]}))))
 
 (facts "about '/api/records/name'"
        (against-background [(api/get-records) => [{:last-name "Stark", :first-name "Tony", :email "iron.man@avengers.com", :favorite-color "red", :birth-date (to-date "1970-05-29")}
@@ -87,12 +87,12 @@
                (let [response (mock-get-request "/api/records/name")
                      body     (parse-body (:body response))]
                  (:status response) => 200
-                 body => {:data [{:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "1970-05-29"}
-                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1982-08-05"}
-                                 {:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "1918-07-04"}
-                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "1995-03-17"}
-                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "1977-10-18"}
-                                 {:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "1977-02-16"}]}))))
+                 body => {:data [{:lastName "Stark", :firstName "Tony", :email "iron.man@avengers.com", :favoriteColor "red", :birthDate "5/29/1970"}
+                                 {:lastName "Romanoff", :firstName "Natasha", :email "shared@avengers.com", :favoriteColor "black", :birthDate "8/5/1982"}
+                                 {:lastName "Rogers", :firstName "Steve", :email "captain.america@avengers.com", :favoriteColor "blue", :birthDate "7/4/1918"}
+                                 {:lastName "Maximoff", :firstName "Wanda", :email "shared@avengers.com", :favoriteColor "red", :birthDate "3/17/1995"}
+                                 {:lastName "Lang", :firstName "Scott", :email "ant.man@avengers.com", :favoriteColor "red", :birthDate "10/18/1977"}
+                                 {:lastName "Barton", :firstName "Clint", :email "shared@avengers.com", :favoriteColor "black", :birthDate "2/16/1977"}]}))))
 
 (facts "about '/api/records'"
        (against-background [(api/add-record {:data "should-pass"}) => "pass"
