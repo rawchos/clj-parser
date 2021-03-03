@@ -1,7 +1,7 @@
 ---
 title: clj-parser.README
 created: '2021-02-28T20:12:59.131Z'
-modified: '2021-03-03T17:51:50.764Z'
+modified: '2021-03-03T18:12:49.761Z'
 ---
 
 # clj-parser
@@ -28,7 +28,7 @@ bin/run-tests
  * I also took some liberties in Avengers birthdays
 
 ## Command Line
-There are sample files located in the `resources/samples` directory. To process a file, run `bin/parse-file resources/samples/{file.txt}` and the output will be displayed to the screen. You can pass in as many files as you like but each will need to have a size greater than 0. I chose to output the entire record, field names and all.
+There are sample files located in the `resources/samples` directory. To process a file, run `bin/parse-files resources/samples/{file.txt}` and the output will be displayed to the screen. You can pass in as many files as you like but you'll need to pass in at least 1 and each will need to have a size greater than 0. I chose to output the entire record, field names and all.
 
 ## REST API
  * Listens on port 8080
