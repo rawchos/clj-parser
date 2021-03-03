@@ -1,6 +1,6 @@
-Rogers | Steve | captain.america@avengers.com | blue | 1918-07-04
-Stark | Tony | iron.man@avengers.com | red | 1970-05-29
-Romanoff | Natasha | shared@avengers.com | black | 1982-08-05
-Maximoff | Wanda | shared@avengers.com | red | 1995-03-17
-Lang | Scott | ant.man@avengers.com | red | 1977-10-18
-Barton | Clint | shared@avengers.com | black | 1977-02-16
+Charles Luke black.panther@avengers.com black 1989-06-14
+Wilson Sam shared@avengers.com red 1992-08-09
+Parker Peter spider.man@avengers.com red 2002-02-05
+Quill Peter guardians@avengers.com red 1980-09-03
+Titan Gamora guardians@avengers.com green 1980-10-18
+Raccoon Rocket guardians@avengers.com brown 1983-01-27

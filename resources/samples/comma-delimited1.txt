@@ -1,6 +1,4 @@
-Barton,Clint,shared@avengers.com,black,1977-02-16
-Romanoff,Natasha,shared@avengers.com,black,1982-08-05
-Stark,Tony,iron.man@avengers.com,red,1970-05-29
-Maximoff,Wanda,shared@avengers.com,red,1995-03-17
-Rogers,Steve,captain.america@avengers.com,blue,1918-07-04
-Lang,Scott,ant.man@avengers.com,red,1977-10-18
+Banner,Bruce,hulk@avengers.com,green,1985-04-15
+Odinson,Thor,shared@avengers.com,gold,1882-01-01
+VanDyne,Janet,wasp@avengers.com,red,1980-05-29
+Maximoff,Pietro,quicksilver@avengers.com,silver,1995-03-17
