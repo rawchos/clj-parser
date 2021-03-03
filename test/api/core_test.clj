@@ -6,6 +6,8 @@
             [midje.sweet :refer [against-background
                                  fact
                                  facts
+                                 provided
+                                 throws
                                  =>]]
             [ring.mock.request :as mock])
   (:import (java.time LocalDate)))
@@ -128,3 +130,13 @@
                                     :status 400
                                     :title "Unable to Parse"
                                     :type "bad-request"}]}))))
+
+(facts "about 'add-record'"
+       (fact "should return the last name if we're able to insert the record"
+             (api/add-record {:data "New|Brand|test@example.com|red|2021-03-03"}) => "new"
+             (provided (api/get-records) => []))
+       (fact "should throw an error if the record already exists"
+             (api/add-record {:data "Exists|Already|test@example.com|red|2021-03-03"}) => (throws clojure.lang.ExceptionInfo)
+             (provided (api/get-records) => [{:last-name "Exists" :first-name "Already" :email "test@example.com" :favorite-color "red" :birth-date (to-date "2021-03-03")}]))
+       (fact "should throw an error if unable to parse the data"
+             (api/add-record {:data "parse-error"}) => (throws clojure.lang.ExceptionInfo)))
