@@ -5,7 +5,13 @@ die () {
   exit 1
 }
 
-[ "$#" -eq 1 ] && [ -s $1 ] ||
-  die "You must pass in a file with a size greater than 0 in order to parse records"
+# [ $# -gt 0 ] && [ -s $1 ] ||
+[ $# -gt 0 ] ||
+  die "You must pass in at least one file to parse"
 
-clj -M -m clj-parser.file-parser $1
+for file in $@
+do
+  [ -s ${file} ] || die "${file} does not have a size greater than 0"
+done
+
+clj -M -m clj-parser.file-parser $@

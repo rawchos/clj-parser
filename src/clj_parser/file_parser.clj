@@ -20,7 +20,9 @@
    {:message "Sorting by Email (descending) then Last Name (ascending):" :sort-fn util/sort-email-last-name}
    {:message "Sorting by Birth Date (ascending):" :sort-fn util/sort-birth-date}])
 
-(defn -main [file]
-  (let [records (map util/parse-record (read-file file))]
+(defn -main [& files]
+  (let [records (flatten
+                 (for [file files]
+                   (map util/parse-record (read-file file))))]
     (doseq [{:keys [message sort-fn]} print-config]
       (print-records message sort-fn records))))
